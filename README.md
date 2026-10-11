@@ -108,5 +108,5 @@ The system configuration actively reserves the physical key chord combo **`Squar
 
 ---
 
-## 📄 License & Attribution
-Configured and curated for the Arch Linux environment on legacy Motion Computing hardware. Feel free to fork, expand, or adapt for other legacy Wacom Penable slate architectures (such as the LE1600 or LS800 series).
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
