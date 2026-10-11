@@ -16,7 +16,7 @@ The LE1700 is an iconic, semi-rugged slate tablet PC featuring a high-density **
 
 ```text
 ├── 90-le1700-buttons.hwdb   # Low-level systemd-udev rule mapping physical scancodes to X11 keys
-├── alternate-button.sh      # Core "Shift Modifier" simulation using xdotool (Tied to Square)
+├── alternate_button.sh      # Core "Shift Modifier" simulation using xdotool (Tied to Square)
 ├── fix-screen-startup.sh    # Post-login initialization script for XFCE autostart profiles
 ├── rotate-screen.sh         # Unified master rotation control logic (Handles X11, Wacom, and D-pad)
 ├── bezel-director.sh        # Spatial absolute mapping interpreter (Decodes changing xmodmap strings)
@@ -51,11 +51,11 @@ The Linux kernel registers the raw physical scancodes of the "Square" and "Circl
 ### Step 3: Script Deployment & Workspace Setup
 1. Create your local system scripts configuration subdirectory:
    ```bash
-   mkdir -p /home/mfw/.myconfig/MotionComputeScripts/
+   mkdir -p ~/.myconfig/MotionComputeScripts/
    ```
 2. Move all `.sh` scripts from this repository into that folder and ensure they have global execution permissions configured:
    ```bash
-   chmod +x /home/mfw/.myconfig/MotionComputeScripts/*.sh
+   chmod +x ~/.myconfig/MotionComputeScripts/*.sh
    ```
 
 ### Step 4: Automating Software Rendering on Boot
@@ -63,17 +63,21 @@ To prevent screen corruption, artifacts, and lag during your desktop session sta
 1. Navigate to **XFCE Settings** -> **Session and Startup** -> **Application Autostart**.
 2. Click **Add** and fill in the properties:
    * **Name:** LE1700 Software Render Initializer
-   * **Command:** `/home/mfw/.myconfig/MotionComputeScripts/fix-screen-startup.sh`
+   * **Command:** `/home/username/.myconfig/MotionComputeScripts/fix-screen-startup.sh`
    * **Trigger:** Set to run automatically on *Log In*.
 
 ---
 
 ## 🕹 XFCE Integration & Key Bindings Matrix
 
-Open **XFCE Settings** -> **Keyboard** -> **Application Shortcuts** to bind your physical tablet buttons to your automated shell scripts. Follow the mapping instructions below:
+Open **XFCE Settings** -> **Keyboard** -> **Application Shortcuts** to bind your physical tablet buttons to your automated shell scripts. 
+
+> **Important Note for XFCE Shortcuts:** XFCE application shortcut input fields execute commands directly without invoking a shell interpreter. Therefore, environment variables (like `$HOME`) and tilde (`~`) shortcuts will not expand correctly. Please use your full absolute path (replacing `username` with your actual login name, e.g., `/home/username/.myconfig/MotionComputeScripts/...`).
+
+Follow the mapping instructions below:
 
 ### 1. The Multiplier Key (The "Square" Bezel Button)
-* **Command:** `/home/mfw/.myconfig/MotionComputeScripts/alternate-button.sh`
+* **Command:** `/home/username/.myconfig/MotionComputeScripts/alternate_button.sh`
 * **Trigger Shortcut:** Press your physical **Square Button** (Registers natively as `F13`).
 * *How it works:* Pressing this button executes `xdotool` to hold down a safe Hyper Key combo (`Ctrl+Alt+Shift+Super`) for 5 seconds, multiplying what your other bezel buttons can do.
 
@@ -92,10 +96,10 @@ Create these 4 shortcuts. Trigger them by pressing your **Square Button** follow
 *Note: Pressing the same absolute location twice sequentially will keep the layout locked safely in place without toggling or flipping.*
 
 ### 3. Workflow App & Orientation Menu (The "Circle" Bezel Button)
-* **Command:** `/home/mfw/.myconfig/MotionComputeScripts/bezel-apps.sh`
+* **Command:** `/home/username/.myconfig/MotionComputeScripts/bezel-apps.sh`
 * **Trigger Shortcut:** Press your physical **Circle Button** (Registers natively as `F14`).
 * *How it works:* Launches an Intel-compatible, non-GL accelerated Zenity dialog showing a clean reading profile list. 
-* *Interaction:* You can navigate options using your D-Pad and Center Enter key, or simply **double-tap options with your Wacom stylus pen** to automatically pivot the display frame and pop open **Xournal++**, **Calibre**, or **PDF-XChange (via Wine)**.
+* *Interaction:* You can navigate options using your D-Pad and Center Enter key, or simply **double-tap options with your Wacom stylus pen** to automatically pivot the display frame and pop open **Xournal++**, **Calibre**, or **PDF-XChange (via Wine)**. Note: Xournal++, Calibre, and PDF-XChange need to be installed separately.
 
 ---
 

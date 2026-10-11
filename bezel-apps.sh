@@ -18,13 +18,19 @@
 # XFCE SHORTCUT SETUP INSTRUCTIONS:
 #   1. Open 'XFCE Settings' -> 'Keyboard' -> 'Application Shortcuts'.
 #   2. Click 'Add' to create a new shortcut mapping.
-#   3. Command: /home/mfw/.myconfig/MotionComputeScripts/bezel-apps.sh
+#   3. Command: $HOME/.myconfig/MotionComputeScripts/bezel-apps.sh
 #   4. Trigger: Press your physical "Circle" bezel button when prompted.
+#
+#   Important Note for XFCE Shortcuts:** XFCE application shortcut input fields
+#   execute commands directly without invoking a shell interpreter. Therefore,
+#   environment variables (like `$HOME`) and tilde (`~`) shortcuts will not expand
+#   correctly. Please use your full absolute path (replacing `username` with your
+#   actual login name, e.g., `/home/username/.myconfig/MotionComputeScripts/...`).
 #
 # ==============================================================================
 
 # --- PATH & COMMAND DEFINITIONS ---
-ROTATION_SCRIPT="/home/mfw/.myconfig/MotionComputeScripts/rotate-screen.sh"
+ROTATION_SCRIPT="$HOME/.myconfig/MotionComputeScripts/rotate-screen.sh"
 PDF_XCHANGE_CMD="/usr/bin/pdf-xchange"
 
 # INTEL 945GM COMPATIBILITY LAYER:

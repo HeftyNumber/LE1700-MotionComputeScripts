@@ -32,23 +32,29 @@
 #   create these 4 explicit entries. Capture the keys by tapping your Square
 #   button followed quickly by the corresponding direction key:
 #
-#   1. Command: /home/mfw/.myconfig/MotionComputeScripts/bezel-director.sh up
+#   1. Command: $HOME/.myconfig/MotionComputeScripts/bezel-director.sh up
 #      Shortcut Trigger: Ctrl+Alt+Shift+Super+Up
 #
-#   2. Command: /home/mfw/.myconfig/MotionComputeScripts/bezel-director.sh right
+#   2. Command: $HOME/.myconfig/MotionComputeScripts/bezel-director.sh right
 #      Shortcut Trigger: Ctrl+Alt+Shift+Super+Right
 #
-#   3. Command: /home/mfw/.myconfig/MotionComputeScripts/bezel-director.sh down
+#   3. Command: $HOME/.myconfig/MotionComputeScripts/bezel-director.sh down
 #      Shortcut Trigger: Ctrl+Alt+Shift+Super+Down
 #
-#   4. Command: /home/mfw/.myconfig/MotionComputeScripts/bezel-director.sh left
+#   4. Command: $HOME/.myconfig/MotionComputeScripts/bezel-director.sh left
 #      Shortcut Trigger: Ctrl+Alt+Shift+Super+Left
+#
+#   Important Note for XFCE Shortcuts:** XFCE application shortcut input fields
+#   execute commands directly without invoking a shell interpreter. Therefore,
+#   environment variables (like `$HOME`) and tilde (`~`) shortcuts will not expand
+#   correctly. Please use your full absolute path (replacing `username` with your
+#   actual login name, e.g., `/home/username/.myconfig/MotionComputeScripts/...`).
 #
 # ==============================================================================
 
 # Parse the incoming string argument from XFCE and normalize it to lower-case
 RELATIVE_DIR=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-ROTATION_SCRIPT="/home/mfw/.myconfig/MotionComputeScripts/rotate-screen.sh"
+ROTATION_SCRIPT="$HOME/.myconfig/MotionComputeScripts/rotate-screen.sh"
 
 # Extract the live display tracking status from the X server active geometry map
 CURRENT_ROT=$(xrandr -q --verbose | sed -n '/ connected /s/.*) \([a-z]*\) (.*/\1/p')
